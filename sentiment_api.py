@@ -20,15 +20,21 @@ async def root():
 async def sentiment_analysis(input: Texte):
     nltk.download('vader_lexicon', quiet=True)
 
-    sia = SentimentIntensityAnalyzer()
+    logger.info(f"Analyzing : {input.texte}")
 
-    sentiment = sia.polarity_scores(input.texte)
+    try:
+        sia = SentimentIntensityAnalyzer()
 
-    logger.info(f"Results: {sentiment}")
+        sentiment = sia.polarity_scores(input.texte)
 
-    return {
-        "neg": sentiment["neg"],
-        "neu": sentiment["neu"],
-        "pos": sentiment["pos"],
-        "compound": sentiment["compound"]
-    }
+        logger.info(f"Results: {sentiment}")
+
+        return {
+            "neg": sentiment["neg"],
+            "neu": sentiment["neu"],
+            "pos": sentiment["pos"],
+            "compound": sentiment["compound"]
+        }
+    except Exception as e:
+        logger.error(f"Something failed while analyzing : {e}")
+        raise HTTPException(status_code=500, detail=str(e))
