@@ -5,3 +5,6 @@ streamlit
 requests
 pydantic
 loguru
+pytest
+httpx
+pytest-asyncio
