@@ -2,7 +2,8 @@ import streamlit as st
 import requests
 from loguru import logger
 
-what_to_analyse = "Bonjour Jean-Luc, comment vas-tu ?"
+
+logger.add("logs/sentiment_streamlit.log", rotation="500 MB", level="INFO")
 
 
 

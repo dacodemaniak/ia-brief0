@@ -11,6 +11,7 @@ logger.add("logs/sentiment_api.log", rotation="500 MB", level="INFO")
 class Texte(BaseModel):
     texte: str
 
+
 @app.get('/')
 async def root():
     logger.info("Route '/' was called")
